@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Niral-Verse 2K26</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cyber: {
+                primary: '#00f0ff',
+                secondary: '#3b82f6', 
+                dark: '#0a0a0a',
+              }
+            },
+            fontFamily: {
+              sans: ['"Share Tech Mono"', 'monospace'], /* Overriding default sans to mono for full immersion */
+              mono: ['"Share Tech Mono"', '"JetBrains Mono"', 'monospace'],
+              orbitron: ['Orbitron', 'sans-serif'],
+            },
+            animation: {
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;700&display=swap');
+      
+      body {
+        background-color: #050505;
+        color: #ffffff;
+        overflow-x: hidden;
+        font-family: 'Share Tech Mono', monospace; /* Default to Hacker Font */
+      }
+      
+      /* Aggressively hide default cursor for desktop on ALL elements */
+      @media (pointer: fine) {
+        html, body, * {
+          cursor: none !important;
+        }
+        /* Explicitly target interactive elements to override user agent stylesheets */
+        a, button, input, select, textarea, [role="button"] {
+          cursor: none !important;
+        }
+      }
+
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Hide scrollbar for IE, Edge and Firefox */
+      html, body {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
+
+      .font-orbitron {
+        font-family: 'Orbitron', sans-serif;
+      }
+      
+      .neon-glow {
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.7),
+                     0 0 20px rgba(0, 240, 255, 0.5),
+                     0 0 40px rgba(0, 240, 255, 0.3);
+      }
+      
+      .neon-border {
+        box-shadow: 0 0 10px rgba(0, 240, 255, 0.5),
+                    inset 0 0 5px rgba(0, 240, 255, 0.2);
+      }
+
+      /* Glassmorphism Utilities */
+      .glass-panel {
+        background: rgba(10, 10, 10, 0.6);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+      
+      /* Typing effect cursor blink */
+      .typing-effect::after {
+        content: '|';
+        animation: blink 1s step-end infinite;
+      }
+      
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "gsap": "https://esm.sh/gsap@^3.14.2",
+    "@tsparticles/engine": "https://esm.sh/@tsparticles/engine@^3.9.1",
+    "@tsparticles/react": "https://esm.sh/@tsparticles/react@^3.0.0",
+    "@tsparticles/slim": "https://esm.sh/@tsparticles/slim@^3.9.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
