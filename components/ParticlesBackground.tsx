@@ -33,7 +33,7 @@ export const ParticlesBackground: React.FC = () => {
             value: "transparent",
           },
         },
-        fpsLimit: 120,
+        fpsLimit: 60, // Limit to 60fps for performance
         interactivity: {
           events: {
             onHover: {
@@ -53,7 +53,7 @@ export const ParticlesBackground: React.FC = () => {
             value: "#00f0ff",
           },
           links: {
-            color: "#3b82f6", // Changed to blue-500
+            color: "#3b82f6", 
             distance: 150,
             enable: true,
             opacity: 0.2,
@@ -72,8 +72,10 @@ export const ParticlesBackground: React.FC = () => {
           number: {
             density: {
               enable: true,
+              height: 800,
+              width: 800
             },
-            value: 80,
+            value: 50, // Reduced from 80 for better performance
           },
           opacity: {
             value: 0.5,
@@ -85,7 +87,7 @@ export const ParticlesBackground: React.FC = () => {
             value: { min: 1, max: 3 },
           },
         },
-        detectRetina: true,
+        detectRetina: false, // Disable retina detection to save resources
       }}
     />
   );

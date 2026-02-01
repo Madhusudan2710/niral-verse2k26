@@ -2,14 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
 export const GrainOverlay: React.FC = () => (
-  <div className="fixed inset-0 pointer-events-none z-[9000] opacity-[0.05] mix-blend-overlay">
-    <svg className="w-full h-full">
-      <filter id="noiseFilter">
-        <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
-      </filter>
-      <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-    </svg>
-  </div>
+  <div 
+    className="fixed inset-0 pointer-events-none z-[9000] opacity-[0.05] mix-blend-overlay"
+    style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+    }}
+  />
 );
 
 export const CustomCursor: React.FC = () => {
@@ -65,9 +63,6 @@ export const CustomCursor: React.FC = () => {
 
     // Interaction Effects
     const handleMouseEnter = (e: Event) => {
-        const target = e.target as HTMLElement;
-        const isMagnetic = target.classList.contains('magnetic');
-        
         // Scale dot down, scale follower up and change blend mode
         gsap.to(cursor, { scale: 0.5, opacity: 0, duration: 0.3 });
         gsap.to(follower, { 
@@ -77,10 +72,6 @@ export const CustomCursor: React.FC = () => {
             backdropFilter: "blur(2px)",
             duration: 0.3 
         });
-
-        if (isMagnetic) {
-          // Additional magnetic logic could go here
-        }
     };
 
     const handleMouseLeave = () => {

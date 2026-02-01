@@ -35,7 +35,19 @@ const DigitalRain: React.FC = () => {
       drops[x] = 1;
     }
 
-    const draw = () => {
+    let animationFrameId: number;
+    let lastTime = 0;
+    const fps = 30;
+    const interval = 1000 / fps;
+
+    const draw = (currentTime: number) => {
+      animationFrameId = requestAnimationFrame(draw);
+
+      const deltaTime = currentTime - lastTime;
+      if (deltaTime < interval) return;
+
+      lastTime = currentTime - (deltaTime % interval);
+
       ctx.fillStyle = 'rgba(0, 5, 8, 0.05)'; // Fade effect
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -59,7 +71,7 @@ const DigitalRain: React.FC = () => {
       }
     };
 
-    const interval = setInterval(draw, 33);
+    animationFrameId = requestAnimationFrame(draw);
 
     const handleResize = () => {
         canvas.width = window.innerWidth;
@@ -68,7 +80,7 @@ const DigitalRain: React.FC = () => {
     window.addEventListener('resize', handleResize);
 
     return () => {
-        clearInterval(interval);
+        cancelAnimationFrame(animationFrameId);
         window.removeEventListener('resize', handleResize);
     };
   }, []);
