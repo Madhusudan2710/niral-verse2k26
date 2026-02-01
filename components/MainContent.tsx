@@ -25,7 +25,7 @@ const EVENTS_LIST = [
     maxMembers: 2,
     timing: "10:30 AM - 11:30 AM",
     rulebook: "/assets/rulebooks/bug_hunt.pdf",
-    contact: { phone: "+919876543210", whatsapp: "919876543210" },
+    contact: { phone: "+919943086228", whatsapp: "+919943086228" },
     npc: { 
       name: "Mr. Javeed", 
       role: "Event Head", 
@@ -48,7 +48,7 @@ const EVENTS_LIST = [
     maxMembers: 2,
     timing: "10:00 AM - 12:00 PM",
     rulebook: "/assets/rulebooks/ui_ux.pdf",
-    contact: { phone: "+919876543211", whatsapp: "919876543211" },
+    contact: { phone: "+917010974603", whatsapp: "+917010974603" },
     npc: { 
       name: "Mr. Sarath", 
       role: "Event Head", 
@@ -71,7 +71,7 @@ const EVENTS_LIST = [
     maxMembers: 2,
     timing: "11:30 AM - 12:30 PM",
     rulebook: "/assets/rulebooks/tech_quiz.pdf",
-    contact: { phone: "+919876543212", whatsapp: "919876543212" },
+    contact: { phone: "", whatsapp: "" },
     npc: { 
       name: "Ms. Fowzeeya", 
       role: "Event Head", 
@@ -94,7 +94,7 @@ const EVENTS_LIST = [
     maxMembers: 2,
     timing: "01:30 PM - 02:30 PM",
     rulebook: "/assets/rulebooks/netiq.pdf",
-    contact: { phone: "+919876543213", whatsapp: "919876543213" },
+    contact: { phone: "+919360331266", whatsapp: "919360331266" },
     npc: { 
       name: "Mr. Madhusudan", 
       role: "Event Head", 
@@ -117,7 +117,7 @@ const EVENTS_LIST = [
     maxMembers: 1,
     timing: "10:30 AM - 11:30 AM",
     rulebook: "/assets/rulebooks/poster_making.pdf",
-    contact: { phone: "+919876543214", whatsapp: "919876543214" },
+    contact: { phone: "+919655650184", whatsapp: "919655650184" },
     npc: { 
       name: "Mr. Gokulnath", 
       role: "Event Head", 
@@ -140,7 +140,7 @@ const EVENTS_LIST = [
     maxMembers: 2,
     timing: "11:30 AM - 12:30 PM",
     rulebook: "/assets/rulebooks/meme_creation.pdf",
-    contact: { phone: "+919876543215", whatsapp: "919876543215" },
+    contact: { phone: "", whatsapp: "" },
     npc: { 
       name: "Mr. Sugin", 
       role: "Event Head", 
@@ -163,7 +163,7 @@ const EVENTS_LIST = [
     maxMembers: 4,
     timing: "10:00 AM Onwards",
     rulebook: "/assets/rulebooks/gaming_zone.pdf",
-    contact: { phone: "+919876543216", whatsapp: "919876543216" },
+    contact: { phone: "+916383142810", whatsapp: "916383142810" },
     npc: { 
       name: "Mr. Viknesh", 
       role: "Event Head", 
@@ -186,7 +186,7 @@ const EVENTS_LIST = [
     maxMembers: 6,
     timing: "02:00 PM - 03:00 PM",
     rulebook: "/assets/rulebooks/corporate_walk.pdf",
-    contact: { phone: "+919876543217", whatsapp: "919876543217" },
+    contact: { phone: "", whatsapp: "" },
     npc: { 
       name: "Director", 
       role: "Executive", 
