@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Bike } from 'lucide-react';
 
-export const TravelSequence: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
+export const TravelSequence: React.FC<{ onComplete: () => void; eventId?: string | null }> = ({ onComplete, eventId }) => {
   useEffect(() => {
     // End sequence after 3 seconds
     const finishTimer = setTimeout(() => {
@@ -54,7 +54,7 @@ export const TravelSequence: React.FC<{ onComplete: () => void }> = ({ onComplet
           {/* Location Status */}
           <div className="mt-4 flex items-center space-x-2 text-gray-400 text-xs font-mono bg-white/5 px-4 py-2 rounded-full border border-white/5">
              <div className="w-2 h-2 bg-green-500 rounded-full animate-ping" />
-             <span className="tracking-widest">LOCATING EVENT COORDINATES...</span>
+             <span className="tracking-widest">LOCATING EVENT COORDINATES{eventId ? ` [${eventId.toUpperCase()}]` : ''}...</span>
           </div>
 
        </div>

@@ -2,6 +2,7 @@ import {
   Bug, Palette, BrainCircuit, Network, Image, 
   Smile, Gamepad2, Briefcase 
 } from 'lucide-react';
+import { IMAGES } from '../assets/images';
 
 export const EVENTS_LIST = [
   { 
@@ -13,7 +14,7 @@ export const EVENTS_LIST = [
     border: "group-hover:border-red-500", 
     shadow: "group-hover:shadow-red-500/50", 
     desc: "Identify and neutralize system vulnerabilities.",
-    banner: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070",
+    banner: IMAGES.BANNERS.BUG_HUNT,
     fullDesc: "Dive into the mainframe and purge critical system errors. Competitors must identify security flaws in a simulated banking infrastructure within 60 minutes.",
     minMembers: 1,
     maxMembers: 2,
@@ -21,9 +22,9 @@ export const EVENTS_LIST = [
     rulebook: "/assets/rulebooks/bug_hunt.pdf",
     contact: { phone: "+919943086228", whatsapp: "+919943086228" },
     npc: { 
-      name: "Mr. Javeed", 
+      name: "Mr. Jaaveed", 
       role: "Event Head", 
-      avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Javeed&mouth=smile&eyebrows=default&clothing=blazerAndShirt&top=shortHair", 
+      avatar: IMAGES.NPCS.JAAVEED, 
       dialogue: "The code is bleeding, Agent. I need you to patch those vulnerabilities before the system crashes." 
     }
   },
@@ -36,7 +37,7 @@ export const EVENTS_LIST = [
     border: "group-hover:border-pink-500", 
     shadow: "group-hover:shadow-pink-500/50", 
     desc: "Architect the next-gen neural interfaces.",
-    banner: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2070&auto=format&fit=crop",
+    banner: IMAGES.BANNERS.UI_UX,
     fullDesc: "Redesign the interface for the colony's life support systems. Aesthetics meet functionality in this high-stakes design challenge.",
     minMembers: 1,
     maxMembers: 2,
@@ -46,7 +47,7 @@ export const EVENTS_LIST = [
     npc: { 
       name: "Mr. Sarath", 
       role: "Event Head", 
-      avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Sarath&clothing=graphicShirt&top=shortHair", 
+      avatar: IMAGES.NPCS.SARATH, 
       dialogue: "Form follows function, but beauty inspires hope. Show me a design that can save the world." 
     }
   },
@@ -59,7 +60,7 @@ export const EVENTS_LIST = [
     border: "group-hover:border-yellow-500", 
     shadow: "group-hover:shadow-yellow-500/50", 
     desc: "Test your knowledge of legacy and quantum systems.",
-    banner: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?q=80&w=2070",
+    banner: IMAGES.BANNERS.TECH_QUIZ,
     fullDesc: "A gauntlet of trivia spanning from the first transistor to the latest quantum processors. Only the most knowledgeable survive.",
     minMembers: 2,
     maxMembers: 2,
@@ -69,7 +70,7 @@ export const EVENTS_LIST = [
     npc: { 
       name: "Ms. Fowzeeya", 
       role: "Event Head", 
-      avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Fowzeeya&top=longHair&clothing=blazerAndShirt&hairColor=4a312c", 
+      avatar: IMAGES.NPCS.FOWZEEYA, 
       dialogue: "Query initiated. Validating intelligence quotient. Prepare for data extraction." 
     }
   },
@@ -82,7 +83,7 @@ export const EVENTS_LIST = [
     border: "group-hover:border-blue-500", 
     shadow: "group-hover:shadow-blue-500/50", 
     desc: "Optimize data flow across the global grid.",
-    banner: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+    banner: IMAGES.BANNERS.NETIQ,
     fullDesc: "The network is congested. You must re-route packets and optimize protocols to restore global communications.",
     minMembers: 2,
     maxMembers: 2,
@@ -92,7 +93,7 @@ export const EVENTS_LIST = [
     npc: { 
       name: "Mr. Madhusudan", 
       role: "Event Head", 
-      avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Madhusudan&top=shortHair&facialHair=beardMedium&clothing=collarAndSweater", 
+      avatar: IMAGES.NPCS.MADHUSUDAN, 
       dialogue: "Signal strength is at 15%. I need you to boost the grid nodes manually. Hurry." 
     }
   },
@@ -105,7 +106,7 @@ export const EVENTS_LIST = [
     border: "group-hover:border-blue-500", 
     shadow: "group-hover:shadow-blue-500/50", 
     desc: "Design propaganda for the resistance.",
-    banner: "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=2070",
+    banner: IMAGES.BANNERS.POSTER,
     fullDesc: "Create visual assets to inspire the populace. The message is as powerful as the weapon.",
     minMembers: 1,
     maxMembers: 1,
@@ -115,7 +116,7 @@ export const EVENTS_LIST = [
     npc: { 
       name: "Mr. Gokulnath", 
       role: "Event Head", 
-      avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Gokulnath&top=shortHair&clothing=graphicShirt", 
+      avatar: IMAGES.NPCS.GOKULNATH, 
       dialogue: "The streets are silent. Wake them up with your art. Make it loud, make it bold." 
     }
   },
@@ -128,7 +129,7 @@ export const EVENTS_LIST = [
     border: "group-hover:border-green-500", 
     shadow: "group-hover:shadow-green-500/50", 
     desc: "Engage in viral memetic warfare.",
-    banner: "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?q=80&w=1974",
+    banner: IMAGES.BANNERS.MEME,
     fullDesc: "Construct viral payloads to disrupt enemy morale. Humor is the ultimate trojan horse.",
     minMembers: 2,
     maxMembers: 2,
@@ -138,7 +139,7 @@ export const EVENTS_LIST = [
     npc: { 
       name: "Mr. Sugin", 
       role: "Event Head", 
-      avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Sugin&top=shortHair&accessories=sunglasses&clothing=hoodie", 
+      avatar: IMAGES.NPCS.SUGIN, 
       dialogue: "Top kek. Upload the payload. If they aren't laughing, we aren't winning." 
     }
   },
@@ -151,7 +152,7 @@ export const EVENTS_LIST = [
     border: "group-hover:border-cyan-500", 
     shadow: "group-hover:shadow-cyan-500/50", 
     desc: "Combat simulation and tactical training.",
-    banner: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070",
+    banner: IMAGES.BANNERS.GAMING,
     fullDesc: "Enter the arena. FPS, MOBA, and Battle Royale simulations to test your reflexes and strategic thinking.",
     minMembers: 4,
     maxMembers: 4,
@@ -161,7 +162,7 @@ export const EVENTS_LIST = [
     npc: { 
       name: "Mr. Viknesh", 
       role: "Event Head", 
-      avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Viknesh&top=shortHair&clothing=graphicShirt", 
+      avatar: IMAGES.NPCS.VIKNESH, 
       dialogue: "1v1 me, recruit. Let's see if your aim is as good as your talk." 
     }
   },
@@ -174,7 +175,7 @@ export const EVENTS_LIST = [
     border: "group-hover:border-orange-500", 
     shadow: "group-hover:shadow-orange-500/50", 
     desc: "Navigate the political labyrinth of the corp.",
-    banner: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070",
+    banner: IMAGES.BANNERS.CORP_WALK,
     fullDesc: "Dress the part, walk the walk. Navigate the boardroom politics and secure the funding for your sector.",
     minMembers: 6,
     maxMembers: 6,
@@ -182,9 +183,9 @@ export const EVENTS_LIST = [
     rulebook: "/assets/rulebooks/corporate_walk.pdf",
     contact: { phone: "", whatsapp: "" },
     npc: { 
-      name: "Director", 
-      role: "Executive", 
-      avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Director&clothing=blazerAndShirt&top=shortHair&facialHair=beardMedium", 
+      name: "Mr. Antony", 
+      role: "Event Head", 
+      avatar: IMAGES.NPCS.ANTONY, 
       dialogue: "Time is money. Impress me in the next 30 seconds, or get out of my office." 
     }
   },
