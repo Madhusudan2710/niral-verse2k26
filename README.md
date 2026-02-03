@@ -41,13 +41,29 @@ This application features a high-fidelity Sci-Fi/Cyberpunk aesthetic, leveraging
 ├── index.html                  # Entry point, CDN imports, Tailwind Config
 ├── index.tsx                   # React Root mount
 ├── App.tsx                     # Main Application Layout
-├── components/
-│   ├── WelcomeScreen.tsx       # Initial intro with logos
-│   ├── CommandDeckHero.tsx     # Main HUD landing page
-│   ├── MainContent.tsx         # Event listing, logic, and modals
-│   ├── ParticlesBackground.tsx # tsparticles configuration
-│   └── UIEffects.tsx           # Custom cursor and grain overlay
-└── metadata.json               # Project metadata
+├── metadata.json               # Project metadata
+└── components/
+    ├── WelcomeScreen.tsx       # Initial intro with logos
+    ├── CommandDeckHero.tsx     # Main HUD landing page
+    ├── MainContent.tsx         # Logic for switching between views
+    ├── ParticlesBackground.tsx # tsparticles configuration
+    ├── UIEffects.tsx           # Custom cursor and grain overlay
+    ├── data/
+    │   └── events.ts           # Event data configuration (modify events here)
+    ├── dashboard/
+    │   └── DashboardSection.tsx# Main event browsing interface
+    ├── events/
+    │   ├── EventZone.tsx       # Individual event detail view
+    │   └── EventListItem.tsx   # List item component
+    ├── modals/
+    │   ├── NPCModal.tsx        # Event Head interaction modal
+    │   ├── RegistrationFormModal.tsx
+    │   └── RegistrationConfirmModal.tsx
+    ├── transitions/
+    │   ├── ArrivalCutscene.tsx
+    │   └── TravelSequence.tsx
+    └── ui/
+        └── CustomScrollbar.tsx
 ```
 
 ## 🚀 Usage
@@ -65,8 +81,8 @@ This project utilizes **ES Modules** via CDN imports (`esm.sh`) defined in the `
 
 ## 🎨 Customization
 
-- **Events Data**: Modified in `components/MainContent.tsx` under the `EVENTS_LIST` constant.
-- **Theme Colors**: Defined in `index.html` under `tailwind.config`.
+- **Events Data**: To add, remove, or modify events, edit `components/data/events.ts`.
+- **Theme Colors**: Defined in `index.html` under the `tailwind.config` script block.
 - **Hero Content**: Institution details and countdown logic are located in `components/CommandDeckHero.tsx`.
 
 ## 🏆 Credits

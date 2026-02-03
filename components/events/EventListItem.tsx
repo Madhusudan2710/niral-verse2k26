@@ -1,11 +1,48 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { EVENTS_LIST } from '../data/events';
 
 export const EventListItem: React.FC<{ event: typeof EVENTS_LIST[0]; index: number; onClick: () => void }> = ({ event, index, onClick }) => {
    const isEven = index % 2 === 0;
+   const elementRef = useRef<HTMLDivElement>(null);
+   const [isVisible, setIsVisible] = useState(false);
+
+   useEffect(() => {
+      const observer = new IntersectionObserver(
+         ([entry]) => {
+            if (entry.isIntersecting) {
+               setIsVisible(true);
+               observer.unobserve(entry.target);
+            }
+         },
+         {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1,
+         }
+      );
+
+      if (elementRef.current) {
+         observer.observe(elementRef.current);
+      }
+
+      return () => {
+         if (elementRef.current) {
+            observer.unobserve(elementRef.current);
+         }
+      };
+   }, []);
 
    return (
-      <div className={`flex flex-col md:flex-row items-center gap-6 md:gap-12 py-6 md:py-8 border-b border-white/5 last:border-0 ${!isEven ? 'md:flex-row-reverse' : ''} group`}>
+      <div 
+         ref={elementRef}
+         className={`
+            flex flex-col md:flex-row items-center gap-6 md:gap-12 py-6 md:py-8 border-b border-white/5 last:border-0 
+            ${!isEven ? 'md:flex-row-reverse' : ''} 
+            group
+            transition-all duration-700 ease-out transform
+            ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}
+         `}
+      >
          {/* Text Content */}
          <div className={`flex-1 space-y-3 md:space-y-4 text-left ${!isEven ? 'md:text-right items-end' : ''} flex flex-col w-full`}>
             <div className={`inline-flex items-center space-x-2 px-3 py-1 rounded border bg-white/5 backdrop-blur-sm w-fit ${event.color.replace('text-', 'border-')} ${event.color} ${!isEven ? 'self-start md:self-end' : 'self-start'}`}>

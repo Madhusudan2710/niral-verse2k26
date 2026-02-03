@@ -220,7 +220,7 @@ const HudPanel: React.FC<{
       <div className={`absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 ${borderColor} rounded-bl-md opacity-80`} />
       <div className={`absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 ${borderColor} rounded-br-md opacity-80`} />
 
-      <div className="relative z-10 p-5 h-full flex flex-col justify-between">
+      <div className="relative z-10 p-6 md:p-7 h-full flex flex-col justify-between">
           {children}
       </div>
     </div>
@@ -315,59 +315,59 @@ export const CommandDeckHero: React.FC<CommandDeckHeroProps> = ({ onInitiateDrop
       <CircuitLines />
 
       {/* Layer 3: Main Layout Grid (Symmetrical System) */}
-      <div className="relative z-20 w-full max-w-[1400px] h-full mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-6 md:gap-8 px-4">
+      <div className="relative z-20 w-full max-w-[1500px] h-full mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-6 md:gap-12 px-6">
         
         {/* Left Column: Panels anchored to right side (center-facing) */}
-        <div className="hidden md:flex flex-col gap-10 items-end justify-center h-full pb-12 perspective-group">
+        <div className="hidden md:flex flex-col gap-12 items-end justify-center h-full pb-12 perspective-group">
             {/* Top Left Panel: College Info */}
-            <div className="w-[260px] transition-transform duration-500 hover:scale-105 hover:z-50"
+            <div className="w-[340px] transition-transform duration-500 hover:scale-105 hover:z-50"
                  style={{ transform: 'rotateY(25deg) rotateX(5deg)', transformOrigin: 'center right' }}>
                 <HudPanel delay={0.2} variant="cyan">
                     <div className="flex justify-between items-start mb-4 border-b border-white/10 pb-2">
                         <div className="flex flex-col">
-                            <span className="text-[8px] text-gray-400 uppercase tracking-widest font-mono">HOST INSTITUTION</span>
-                            <div className="text-sm font-orbitron font-bold text-white tracking-wide mt-1 leading-tight">
+                            <span className="text-xs text-gray-400 uppercase tracking-widest font-mono">HOST INSTITUTION</span>
+                            <div className="text-lg font-orbitron font-bold text-white tracking-wide mt-2 leading-tight">
                                 Hindustan College of Arts & Science 
                             </div>
                         </div>
-                        <Building size={14} className="text-cyan-400 mt-1" />
+                        <Building size={20} className="text-cyan-400 mt-1" />
                     </div>
-                    <div className="space-y-3">
-                        <div className="flex flex-col gap-1">
-                            <div className="text-[9px] font-mono text-cyan-100/80 flex items-start gap-2">
-                                <GraduationCap size={10} className="mt-0.5 text-cyan-400" />
+                    <div className="space-y-4">
+                        <div className="flex flex-col gap-2">
+                            <div className="text-xs font-mono text-cyan-100/80 flex items-start gap-3">
+                                <GraduationCap size={16} className="mt-0.5 text-cyan-400" />
                                 <span>Affiliated to University of Madras</span>
                             </div>
-                            <div className="text-[9px] font-mono text-cyan-100/80 flex items-start gap-2">
-                                <ShieldCheck size={10} className="mt-0.5 text-green-400" />
+                            <div className="text-xs font-mono text-cyan-100/80 flex items-start gap-3">
+                                <ShieldCheck size={16} className="mt-0.5 text-green-400" />
                                 <span>NAAC 'A' Grade (2f) Status by UGC</span>
                             </div>
-                            <div className="text-[9px] font-mono text-cyan-100/80 flex items-start gap-2">
-                                <Clock size={10} className="mt-0.5 text-cyan-400" />
+                            <div className="text-xs font-mono text-cyan-100/80 flex items-start gap-3">
+                                <Clock size={16} className="mt-0.5 text-cyan-400" />
                                 <span>Christian Minority Institution</span>
                             </div>
                         </div>
                         
-                        <div className="mt-2 pt-2 border-t border-white/5 flex items-center gap-2 text-[9px] font-mono text-gray-400">
-                             <MapPin size={10} className="text-cyan-400" /> Padur, Chennai – 603103
+                        <div className="mt-2 pt-3 border-t border-white/5 flex items-center gap-2 text-xs font-mono text-gray-400">
+                             <MapPin size={14} className="text-cyan-400" /> Padur, Chennai – 603103
                         </div>
                     </div>
                 </HudPanel>
             </div>
 
             {/* Bottom Left Panel: Conducted By */}
-            <div className="w-[300px] transition-transform duration-500 hover:scale-105 hover:z-50"
+            <div className="w-[380px] transition-transform duration-500 hover:scale-105 hover:z-50"
                  style={{ transform: 'rotateY(25deg) rotateX(-5deg)', transformOrigin: 'center right' }}>
                 <HudPanel delay={0.6} variant="cyan">
                     <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-2">
-                        <span className="text-[9px] text-cyan-300 uppercase tracking-widest font-mono flex items-center gap-2 drop-shadow-[0_0_5px_cyan]">
-                            <GraduationCap size={10}/> | CONDUCTED BY |
+                        <span className="text-xs text-cyan-300 uppercase tracking-widest font-mono flex items-center gap-2 drop-shadow-[0_0_5px_cyan]">
+                            <GraduationCap size={16}/> | CONDUCTED BY |
                         </span>
                     </div>
-                    <div className="font-mono text-xs text-cyan-100/90 leading-relaxed bg-black/20 p-4 rounded h-28 flex flex-col justify-center items-center text-center border border-white/5 relative overflow-hidden group">
+                    <div className="font-mono text-base text-cyan-100/90 leading-relaxed bg-black/20 p-6 rounded h-32 flex flex-col justify-center items-center text-center border border-white/5 relative overflow-hidden group">
                          <div className="absolute inset-0 bg-cyan-500/5 group-hover:bg-cyan-500/10 transition-colors" />
                          <p className="font-bold text-white mb-2 tracking-wide relative z-10">DEPARTMENT OF<br/>COMPUTER APPLICATIONS</p>
-                         <p className="text-cyan-400 font-orbitron tracking-widest text-[10px] relative z-10 border-t border-cyan-500/30 pt-2 mt-1 w-full">BCA (SUNSTONE)</p>
+                         <p className="text-cyan-400 font-orbitron tracking-widest text-sm relative z-10 border-t border-cyan-500/30 pt-2 mt-1 w-full">BCA (SUNSTONE)</p>
                     </div>
                 </HudPanel>
             </div>
@@ -375,25 +375,25 @@ export const CommandDeckHero: React.FC<CommandDeckHeroProps> = ({ onInitiateDrop
 
         {/* Center Column: Command (Title & Button) */}
         <div className="flex flex-col items-center justify-center z-30 pt-10">
-            <div ref={titleRef} className="text-center relative mb-8">
+            <div ref={titleRef} className="text-center relative mb-10">
                 <div className="absolute inset-0 bg-black/60 blur-xl rounded-full opacity-60" />
 
-                <h1 className="text-4xl md:text-6xl font-black font-orbitron tracking-tight text-white drop-shadow-[0_0_20px_rgba(0,240,255,0.6)] relative z-10 leading-none mix-blend-screen flex flex-col items-center gap-1">
+                <h1 className="text-4xl md:text-7xl lg:text-8xl font-black font-orbitron tracking-tight text-white drop-shadow-[0_0_20px_rgba(0,240,255,0.6)] relative z-10 leading-none mix-blend-screen flex flex-col items-center gap-2">
                     <span className="tracking-widest">NIRAL - VERSE</span>
                     <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#ffaa40] to-[#ff5500] drop-shadow-[0_0_30px_rgba(255,100,0,0.6)]">
                         2K26
                     </span>
                 </h1>
 
-                <p className="mt-4 text-cyan-100/70 font-mono text-[10px] md:text-xs uppercase tracking-widest max-w-lg mx-auto leading-relaxed text-center hidden md:block drop-shadow-md relative z-10">
-                    Annual Tech Fest – Hindustan College of Arts & Science <span className="text-orange-400 text-xs ml-1">(SUNSTONE)</span>
+                <p className="mt-6 text-cyan-100/70 font-mono text-sm md:text-base uppercase tracking-widest max-w-2xl mx-auto leading-relaxed text-center hidden md:block drop-shadow-md relative z-10">
+                    Annual Tech Fest – Hindustan College of Arts & Science <span className="text-orange-400 text-sm ml-1">(SUNSTONE)</span>
                 </p>
             </div>
 
-            <div className="relative group perspective-500 mt-6" ref={btnRef}>
+            <div className="relative group perspective-500 mt-8" ref={btnRef}>
                 <button 
                     onClick={onInitiateDrop}
-                    className="relative w-72 h-14 transform transition-all duration-300 group-hover:scale-105 group-hover:translate-y-[-2px]"
+                    className="relative w-96 h-20 transform transition-all duration-300 group-hover:scale-105 group-hover:translate-y-[-2px]"
                 >
                     {/* Button Frame - Orange */}
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/40 via-blue-500/40 to-cyan-600/40 backdrop-blur-md border-t border-b border-orange-500/50 skew-x-[-12deg] shadow-[0_0_30px_rgba(255,170,64,0.3)] group-hover:shadow-[0_0_50px_rgba(255,170,64,0.6)] overflow-hidden">
@@ -402,10 +402,10 @@ export const CommandDeckHero: React.FC<CommandDeckHeroProps> = ({ onInitiateDrop
                     </div>
                     
                     {/* Side Decor - Orange */}
-                    <div className="absolute left-[-10px] top-0 h-full w-4 bg-gray-900/80 skew-x-[-12deg] border-l border-orange-500/50" />
-                    <div className="absolute right-[-10px] top-0 h-full w-4 bg-gray-900/80 skew-x-[-12deg] border-r border-orange-500/50" />
+                    <div className="absolute left-[-15px] top-0 h-full w-6 bg-gray-900/80 skew-x-[-12deg] border-l border-orange-500/50" />
+                    <div className="absolute right-[-15px] top-0 h-full w-6 bg-gray-900/80 skew-x-[-12deg] border-r border-orange-500/50" />
 
-                    <div className="absolute inset-0 flex items-center justify-center gap-3 text-white font-orbitron font-bold tracking-[0.2em] text-sm z-10 drop-shadow-md">
+                    <div className="absolute inset-0 flex items-center justify-center gap-3 text-white font-orbitron font-bold tracking-[0.2em] text-lg z-10 drop-shadow-md">
                         INITIATE REGISTRATION 
                         <span className="text-white group-hover:translate-y-1 transition-transform">↓</span>
                     </div>
@@ -414,26 +414,26 @@ export const CommandDeckHero: React.FC<CommandDeckHeroProps> = ({ onInitiateDrop
         </div>
 
         {/* Right Column: Panels anchored to left side (center-facing) */}
-        <div className="hidden md:flex flex-col gap-10 items-start justify-center h-full pb-12 perspective-group">
+        <div className="hidden md:flex flex-col gap-12 items-start justify-center h-full pb-12 perspective-group">
             {/* Top Right Panel: Date & Schedule (Orange) */}
-            <div className="w-[260px] transition-transform duration-500 hover:scale-105 hover:z-50"
+            <div className="w-[340px] transition-transform duration-500 hover:scale-105 hover:z-50"
                  style={{ transform: 'rotateY(-25deg) rotateX(5deg)', transformOrigin: 'center left' }}>
                 <HudPanel delay={0.4} variant="orange">
                     <div className="flex justify-between items-start mb-4 border-b border-white/10 pb-2 flex-row-reverse">
                         <div className="flex flex-col text-right">
-                            <span className="text-[8px] text-gray-400 uppercase tracking-widest font-mono">TARGET DATE</span>
-                            <div className="text-xl font-orbitron font-bold text-white tracking-wider drop-shadow-md mt-1">17_FEB_2026</div>
+                            <span className="text-xs text-gray-400 uppercase tracking-widest font-mono">TARGET DATE</span>
+                            <div className="text-2xl font-orbitron font-bold text-white tracking-wider drop-shadow-md mt-1">17_FEB_2026</div>
                         </div>
-                        <Calendar size={14} className="text-orange-400 mt-1" />
+                        <Calendar size={20} className="text-orange-400 mt-1" />
                     </div>
-                    <div className="space-y-3 text-right">
+                    <div className="space-y-4 text-right">
                         <div className="flex flex-col items-end">
-                            <span className="text-[8px] text-gray-400 font-mono uppercase">SCHEDULE</span>
-                            <div className="text-[10px] font-mono text-orange-400 font-bold">09:00 AM – 03:00 PM</div>
+                            <span className="text-xs text-gray-400 font-mono uppercase">SCHEDULE</span>
+                            <div className="text-base font-mono text-orange-400 font-bold mt-1">09:00 AM – 03:00 PM</div>
                         </div>
                         <div className="flex flex-col items-end mt-4">
-                            <span className="text-[8px] text-gray-400 font-mono uppercase mb-1">VENUE</span>
-                            <div className="text-[10px] font-bold text-white font-mono tracking-widest bg-orange-500/10 px-3 py-1 rounded border border-orange-500/20">
+                            <span className="text-xs text-gray-400 font-mono uppercase mb-2">VENUE</span>
+                            <div className="text-xs font-bold text-white font-mono tracking-widest bg-orange-500/10 px-4 py-2 rounded border border-orange-500/20">
                             HCAS CAMPUS, CHENNAI
                             </div>
                         </div>
@@ -442,32 +442,32 @@ export const CommandDeckHero: React.FC<CommandDeckHeroProps> = ({ onInitiateDrop
             </div>
 
             {/* Bottom Right Panel: Countdown Timer */}
-            <div className="w-[300px] transition-transform duration-500 hover:scale-105 hover:z-50 text-right"
+            <div className="w-[380px] transition-transform duration-500 hover:scale-105 hover:z-50 text-right"
                  style={{ transform: 'rotateY(-25deg) rotateX(-5deg)', transformOrigin: 'center left' }}>
                 <HudPanel delay={0.8} variant="orange">
                     <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-2 flex-row-reverse">
-                        <span className="text-[9px] text-orange-300 uppercase tracking-widest font-mono flex items-center gap-2 flex-row-reverse drop-shadow-[0_0_5px_orange]">
-                            <Clock size={10}/> | COUNTDOWN TO NIRAL-VERSE |
+                        <span className="text-xs text-orange-300 uppercase tracking-widest font-mono flex items-center gap-2 flex-row-reverse drop-shadow-[0_0_5px_orange]">
+                            <Clock size={16}/> | COUNTDOWN TO NIRAL-VERSE |
                         </span>
                     </div>
                     
-                    <div className="grid grid-cols-4 gap-2 text-center py-4">
-                         <div className="flex flex-col items-center bg-white/5 p-2 rounded border border-white/5">
-                            <span className="text-lg font-orbitron font-bold text-white">{String(timeLeft.days).padStart(2, '0')}</span>
-                            <span className="text-[8px] text-gray-400 uppercase">DAYS</span>
+                    <div className="grid grid-cols-4 gap-3 text-center py-5">
+                         <div className="flex flex-col items-center bg-white/5 p-3 rounded border border-white/5">
+                            <span className="text-2xl font-orbitron font-bold text-white">{String(timeLeft.days).padStart(2, '0')}</span>
+                            <span className="text-[10px] text-gray-400 uppercase font-mono mt-1">DAYS</span>
                          </div>
-                         <div className="flex flex-col items-center bg-white/5 p-2 rounded border border-white/5">
-                            <span className="text-lg font-orbitron font-bold text-white">{String(timeLeft.hours).padStart(2, '0')}</span>
-                            <span className="text-[8px] text-gray-400 uppercase">HRS</span>
+                         <div className="flex flex-col items-center bg-white/5 p-3 rounded border border-white/5">
+                            <span className="text-2xl font-orbitron font-bold text-white">{String(timeLeft.hours).padStart(2, '0')}</span>
+                            <span className="text-[10px] text-gray-400 uppercase font-mono mt-1">HRS</span>
                          </div>
-                         <div className="flex flex-col items-center bg-white/5 p-2 rounded border border-white/5">
-                            <span className="text-lg font-orbitron font-bold text-white">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                            <span className="text-[8px] text-gray-400 uppercase">MIN</span>
+                         <div className="flex flex-col items-center bg-white/5 p-3 rounded border border-white/5">
+                            <span className="text-2xl font-orbitron font-bold text-white">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                            <span className="text-[10px] text-gray-400 uppercase font-mono mt-1">MIN</span>
                          </div>
-                         <div className="flex flex-col items-center bg-white/5 p-2 rounded border border-white/5 relative overflow-hidden">
+                         <div className="flex flex-col items-center bg-white/5 p-3 rounded border border-white/5 relative overflow-hidden">
                              <div className="absolute inset-0 bg-orange-500/10 animate-pulse" />
-                            <span className="text-lg font-orbitron font-bold text-orange-400 relative z-10">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                            <span className="text-[8px] text-orange-300 uppercase relative z-10">SEC</span>
+                            <span className="text-2xl font-orbitron font-bold text-orange-400 relative z-10">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                            <span className="text-[10px] text-orange-300 uppercase relative z-10 font-mono mt-1">SEC</span>
                          </div>
                     </div>
                 </HudPanel>
@@ -478,7 +478,7 @@ export const CommandDeckHero: React.FC<CommandDeckHeroProps> = ({ onInitiateDrop
 
       {/* Mobile Footer */}
       <div className="absolute inset-x-0 bottom-4 text-center md:hidden px-4 z-50 pointer-events-none">
-          <p className="text-[10px] text-cyan-600 font-mono bg-black/50 inline-block px-2 py-1 rounded backdrop-blur">
+          <p className="text-xs text-cyan-600 font-mono bg-black/50 inline-block px-3 py-1 rounded backdrop-blur">
              OPTIMIZED FOR DESKTOP INTERFACE
           </p>
       </div>

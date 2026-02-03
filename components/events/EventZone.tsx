@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
-  ArrowLeft, Clock, Target, FileText, Users, ShieldAlert, Zap, Radio, ArrowDown, 
+  ArrowLeft, Clock, Target, FileText, Users, ShieldAlert, Zap, 
   MessageCircle, Phone 
 } from 'lucide-react';
 import { EVENTS_LIST } from '../data/events';
@@ -10,35 +10,6 @@ export const EventZone: React.FC<{
    onEnterZone: () => void, 
    onBack: () => void 
 }> = ({ event, onEnterZone, onBack }) => {
-   const [showContact, setShowContact] = useState(false);
-
-   const ContactOptions = () => (
-      <div className="space-y-3 animate-in fade-in slide-in-from-top-2">
-         <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-2">Select Channel</p>
-         <a 
-            href={`https://wa.me/${event.contact?.whatsapp || ''}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded transition-all flex items-center justify-center gap-2 cursor-hover text-sm"
-         >
-            <MessageCircle size={18} />
-            <span>WHATSAPP</span>
-         </a>
-         <a 
-            href={`tel:${event.contact?.phone || ''}`}
-            className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded transition-all flex items-center justify-center gap-2 cursor-hover text-sm"
-         >
-            <Phone size={18} />
-            <span>VOICE CALL</span>
-         </a>
-         <button 
-            onClick={() => setShowContact(false)}
-            className="text-xs text-gray-500 hover:text-white underline decoration-gray-500 cursor-hover"
-         >
-            Cancel
-         </button>
-      </div>
-   );
 
    return (
       <div className="relative w-full min-h-screen bg-black text-white">
@@ -106,14 +77,10 @@ export const EventZone: React.FC<{
                         href={event.rulebook}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center space-x-2 text-xs font-bold text-orange-400 hover:text-orange-300 transition-colors uppercase tracking-widest group/link"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 hover:border-orange-500 rounded transition-all group cursor-hover w-fit"
                      >
-                        <div className="p-1.5 rounded bg-orange-500/10 border border-orange-500/30 group-hover/link:bg-orange-500/20 transition-colors">
-                           <FileText size={14} />
-                        </div>
-                        <span className="border-b border-orange-500/30 pb-0.5 group-hover/link:border-orange-500 transition-colors">
-                           Download Mission Protocols (Rulebook)
-                        </span>
+                        <FileText size={16} className="text-orange-400 group-hover:scale-110 transition-transform" />
+                        <span className="text-orange-400 text-xs font-bold font-mono uppercase tracking-widest">RULES</span>
                      </a>
                   </div>
 
@@ -145,18 +112,24 @@ export const EventZone: React.FC<{
                      <h4 className="text-white font-bold font-orbitron text-lg mb-1">{event.npc.name}</h4>
                      <p className="text-cyan-500 text-xs font-mono uppercase mb-4">{event.npc.role}</p>
                      
-                     {!showContact ? (
-                        <button 
-                           onClick={() => setShowContact(true)}
-                           className="w-full py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold rounded transition-all flex items-center justify-center gap-2 group cursor-hover text-sm"
-                        >
-                           <Radio size={18} />
-                           <span>ESTABLISH COMMS</span>
-                           <ArrowDown size={14} className="group-hover:translate-y-1 transition-transform" />
-                        </button>
-                     ) : (
-                        <ContactOptions />
-                     )}
+                     <div className="flex gap-3">
+                         <a 
+                            href={`https://wa.me/${event.contact?.whatsapp || ''}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 py-3 bg-green-500/10 hover:bg-green-500/20 border border-green-500/30 text-green-400 font-bold rounded transition-all flex items-center justify-center gap-2 cursor-hover text-xs"
+                         >
+                            <MessageCircle size={18} />
+                            <span>WHATSAPP</span>
+                         </a>
+                         <a 
+                            href={`tel:${event.contact?.phone || ''}`}
+                            className="flex-1 py-3 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 text-blue-400 font-bold rounded transition-all flex items-center justify-center gap-2 cursor-hover text-xs"
+                         >
+                            <Phone size={18} />
+                            <span>CALL</span>
+                         </a>
+                     </div>
                   </div>
 
                   {/* Bottom Registration Button */}
@@ -184,18 +157,24 @@ export const EventZone: React.FC<{
                         <h4 className="text-white font-bold font-orbitron text-lg">{event.npc.name}</h4>
                         <p className="text-cyan-500 text-xs font-mono uppercase mb-6">{event.npc.role}</p>
                         
-                        {!showContact ? (
-                           <button 
-                              onClick={() => setShowContact(true)}
-                              className="w-full py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold rounded transition-all flex items-center justify-center gap-2 group cursor-hover text-sm"
+                        <div className="flex gap-3">
+                           <a 
+                              href={`https://wa.me/${event.contact?.whatsapp || ''}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 py-3 bg-green-500/10 hover:bg-green-500/20 border border-green-500/30 text-green-400 font-bold rounded transition-all flex flex-col items-center justify-center gap-1 cursor-hover group"
                            >
-                              <Radio size={18} />
-                              <span>ESTABLISH COMMS</span>
-                              <ArrowDown size={14} className="group-hover:translate-y-1 transition-transform" />
-                           </button>
-                        ) : (
-                           <ContactOptions />
-                        )}
+                              <MessageCircle size={20} className="group-hover:scale-110 transition-transform" />
+                              <span className="text-[10px]">WHATSAPP</span>
+                           </a>
+                           <a 
+                              href={`tel:${event.contact?.phone || ''}`}
+                              className="flex-1 py-3 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 text-blue-400 font-bold rounded transition-all flex flex-col items-center justify-center gap-1 cursor-hover group"
+                           >
+                              <Phone size={20} className="group-hover:scale-110 transition-transform" />
+                              <span className="text-[10px]">CALL</span>
+                           </a>
+                        </div>
                      </div>
                   </div>
                </div>

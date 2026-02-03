@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Calendar, Cpu, Gamepad2, ArrowLeft, Music 
+  Calendar, Cpu, Gamepad2, ArrowLeft
 } from 'lucide-react';
 import { EVENTS_LIST } from '../data/events';
 import { CustomScrollbar } from '../ui/CustomScrollbar';
@@ -31,26 +31,94 @@ export const DashboardSection: React.FC<{ onBackToHome: () => void }> = ({ onBac
   const [showNpc, setShowNpc] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  
+  // Ref to track if we've done initial history reconstruction
+  const historyInitialized = useRef(false);
 
   const activeEvent = EVENTS_LIST.find(e => e.id === activeEventId);
   const filteredEvents = EVENTS_LIST.filter(e => e.category === selectedCategory);
 
-  // Helper to update state and storage
-  const updateCategory = (cat: 'Technical' | 'Non-Technical' | null) => {
-      setSelectedCategory(cat);
-      if (cat) sessionStorage.setItem('niral_category', cat);
-      else sessionStorage.removeItem('niral_category');
-  };
+  // --- HISTORY MANAGEMENT ---
 
-  const updateEventId = (id: string | null) => {
-      setActiveEventId(id);
-      if (id) sessionStorage.setItem('niral_event_id', id);
-      else sessionStorage.removeItem('niral_event_id');
+  // 1. Reconstruct History on Mount (for Reloads)
+  useEffect(() => {
+    if (historyInitialized.current) return;
+    historyInitialized.current = true;
+
+    // If we loaded deep into the app (e.g. Event View) but history state doesn't match
+    const currentState = window.history.state;
+    
+    // If we are at an Event, but history is missing or just 'dashboard'
+    if (activeEventId && (!currentState || !currentState.eventId)) {
+       // We need to inject the back stack: Dashboard -> Category -> Event
+       // Note: This is a bit hacky but prevents "Back" from exiting the app on reload
+       const cat = selectedCategory;
+       const evt = activeEventId;
+       
+       // Replace current with Root
+       window.history.replaceState({ view: 'dashboard' }, '');
+       // Push Category
+       if (cat) window.history.pushState({ view: 'dashboard', category: cat }, '');
+       // Push Event
+       if (evt) window.history.pushState({ view: 'dashboard', category: cat, eventId: evt }, '');
+    } 
+    else if (selectedCategory && (!currentState || !currentState.category)) {
+       const cat = selectedCategory;
+       window.history.replaceState({ view: 'dashboard' }, '');
+       window.history.pushState({ view: 'dashboard', category: cat }, '');
+    }
+  }, []); // Run once on mount
+
+  // 2. Handle Browser Back Button (PopState)
+  useEffect(() => {
+     const handlePopState = (event: PopStateEvent) => {
+        const state = event.state;
+        
+        // We only care if the state is related to 'dashboard'
+        // MainContent handles switching out of dashboard entirely
+        if (state && state.view === 'dashboard') {
+            // Sync local state with history state
+            setActiveEventId(state.eventId || null);
+            setSelectedCategory(state.category || null);
+            
+            // Close any open modals/overlays
+            setIsTraveling(false);
+            setShowNpc(false);
+            setShowConfirm(false);
+            setShowForm(false);
+        }
+     };
+
+     window.addEventListener('popstate', handlePopState);
+     return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // 3. Update Session Storage
+  useEffect(() => {
+    try {
+        if (selectedCategory) sessionStorage.setItem('niral_category', selectedCategory);
+        else sessionStorage.removeItem('niral_category');
+
+        if (activeEventId) sessionStorage.setItem('niral_event_id', activeEventId);
+        else sessionStorage.removeItem('niral_event_id');
+    } catch (e) {}
+  }, [selectedCategory, activeEventId]);
+
+
+  // --- NAVIGATION HANDLERS ---
+
+  const handleCategorySelect = (cat: 'Technical' | 'Non-Technical') => {
+      setSelectedCategory(cat);
+      // Push History
+      window.history.pushState({ view: 'dashboard', category: cat }, '');
   };
 
   const handleEventClick = (eventId: string) => {
-    updateEventId(eventId);
+    setActiveEventId(eventId);
     setIsTraveling(true);
+    // Push History
+    window.history.pushState({ view: 'dashboard', category: selectedCategory, eventId: eventId }, '');
+    
     // Reset all modal states
     setShowNpc(false); 
     setShowConfirm(false);
@@ -59,14 +127,6 @@ export const DashboardSection: React.FC<{ onBackToHome: () => void }> = ({ onBac
 
   const handleTravelComplete = () => {
     setIsTraveling(false);
-  };
-
-  const handleBackToBoard = () => {
-     updateEventId(null);
-  };
-
-  const handleBackToCategories = () => {
-     updateCategory(null);
   };
 
   const handleEnterZone = () => {
@@ -79,6 +139,11 @@ export const DashboardSection: React.FC<{ onBackToHome: () => void }> = ({ onBac
   };
 
   const handleConfirmYes = () => {
+     setShowConfirm(false);
+     setShowForm(true);
+  };
+
+  const handleConfirmYesLogic = () => {
      setShowConfirm(false);
      setShowForm(true);
   };
@@ -116,7 +181,7 @@ export const DashboardSection: React.FC<{ onBackToHome: () => void }> = ({ onBac
        <div className="fixed inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-[#172554] via-[#050505] to-[#000000] pointer-events-none opacity-40" />
 
        {/* Overlays */}
-       {isTraveling && <TravelSequence onComplete={handleTravelComplete} />}
+       {isTraveling && <TravelSequence onComplete={handleTravelComplete} eventId={activeEventId} />}
        
        {showNpc && activeEvent && (
          <NPCModal 
@@ -129,7 +194,7 @@ export const DashboardSection: React.FC<{ onBackToHome: () => void }> = ({ onBac
        {showConfirm && activeEvent && (
          <RegistrationConfirmModal 
             eventName={activeEvent.title}
-            onConfirm={handleConfirmYes}
+            onConfirm={handleConfirmYesLogic}
             onCancel={() => setShowConfirm(false)}
          />
        )}
@@ -147,7 +212,7 @@ export const DashboardSection: React.FC<{ onBackToHome: () => void }> = ({ onBac
              <EventZone 
                 event={activeEvent} 
                 onEnterZone={handleEnterZone} 
-                onBack={handleBackToBoard} 
+                onBack={() => window.history.back()} 
              />
           </div>
        ) : (
@@ -155,20 +220,20 @@ export const DashboardSection: React.FC<{ onBackToHome: () => void }> = ({ onBac
              <CustomScrollbar />
 
              {/* Header */}
-             <header className="flex justify-between items-center p-4 md:p-12 border-b border-white/10 relative z-10 bg-black/60 backdrop-blur-xl sticky top-0 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-               <div className="flex items-center space-x-3 md:space-x-4">
-                 <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center backdrop-blur-md border ${headerIconBg} ${headerIconBorder} ${headerIconColor}`}>
+             <header className="fixed top-0 left-0 w-full flex justify-between items-center py-6 px-5 md:py-8 md:px-12 border-b border-white/10 z-50 bg-black/90 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.5)] transition-all duration-300">
+               <div className="flex items-center space-x-3 md:space-x-4 min-w-0">
+                 <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center backdrop-blur-md border ${headerIconBg} ${headerIconBorder} ${headerIconColor} shrink-0`}>
                    <HeaderIcon size={20} className="md:w-7 md:h-7" />
                  </div>
-                 <div>
-                   <h2 className={`text-lg md:text-3xl font-orbitron font-bold tracking-wide uppercase ${selectedCategory ? headerIconColor : 'text-white'}`}>
+                 <div className="min-w-0 flex-1">
+                   <h2 className={`text-sm sm:text-xl md:text-3xl font-orbitron font-bold tracking-wide uppercase mb-1 whitespace-nowrap overflow-hidden text-ellipsis ${selectedCategory ? headerIconColor : 'text-white'}`}>
                       {headerTitle}
                    </h2>
-                   <p className="text-gray-500 text-[10px] md:text-xs font-mono uppercase tracking-widest">{headerSubtitle}</p>
+                   <p className="text-gray-500 text-[10px] md:text-xs font-mono uppercase tracking-widest truncate">{headerSubtitle}</p>
                  </div>
                </div>
                
-               <div className="flex items-center gap-4">
+               <div className="flex items-center gap-4 shrink-0 pl-4">
                    {/* Encryption Status (visible only on desktop root view) */}
                    {!showListView && (
                      <div className="hidden md:flex items-center space-x-4 border-r border-white/10 pr-4 mr-2">
@@ -180,7 +245,7 @@ export const DashboardSection: React.FC<{ onBackToHome: () => void }> = ({ onBac
                    {/* Back Button Logic */}
                    {showListView ? (
                        <button 
-                         onClick={handleBackToCategories}
+                         onClick={() => window.history.back()}
                          className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors cursor-hover"
                        >
                          <ArrowLeft size={20} />
@@ -198,7 +263,7 @@ export const DashboardSection: React.FC<{ onBackToHome: () => void }> = ({ onBac
                </div>
              </header>
 
-             <div className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-12 relative z-10 flex flex-col justify-center">
+             <div className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-6 pt-32 md:pt-48 pb-12 relative z-10 flex flex-col justify-center">
                
                {/* View 2: Category Selection (Tech vs Non-Tech) */}
                {!selectedCategory && (
@@ -206,7 +271,7 @@ export const DashboardSection: React.FC<{ onBackToHome: () => void }> = ({ onBac
                      
                      {/* Technical Card */}
                      <button 
-                        onClick={() => updateCategory('Technical')}
+                        onClick={() => handleCategorySelect('Technical')}
                         className="group relative h-64 md:h-[45vh] rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-500 transition-all duration-500 cursor-hover shadow-2xl bg-gradient-to-br from-cyan-950/30 via-slate-900/50 to-black"
                      >
                         <div className="absolute inset-0 bg-gray-900/50 mix-blend-overlay">
@@ -220,9 +285,6 @@ export const DashboardSection: React.FC<{ onBackToHome: () => void }> = ({ onBac
                         <div className="absolute inset-0 bg-gradient-to-t from-cyan-950/90 via-transparent to-transparent opacity-90" />
                         
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-                           <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-cyan-500/10 border border-cyan-500/50 flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-500 backdrop-blur-sm shadow-[0_0_30px_rgba(6,182,212,0.3)]">
-                              <Cpu className="w-6 h-6 md:w-8 md:h-8 text-cyan-400" />
-                           </div>
                            <h2 className="text-2xl md:text-5xl font-orbitron font-black text-white mb-2 md:mb-4 tracking-tight group-hover:text-cyan-400 transition-colors drop-shadow-lg">
                               TECHNICAL
                            </h2>
@@ -240,7 +302,7 @@ export const DashboardSection: React.FC<{ onBackToHome: () => void }> = ({ onBac
 
                      {/* Non-Technical Card */}
                      <button 
-                        onClick={() => updateCategory('Non-Technical')}
+                        onClick={() => handleCategorySelect('Non-Technical')}
                         className="group relative h-64 md:h-[45vh] rounded-2xl overflow-hidden border border-white/10 hover:border-blue-500 transition-all duration-500 cursor-hover shadow-2xl bg-gradient-to-br from-blue-950/30 via-slate-900/50 to-black"
                      >
                         <div className="absolute inset-0 bg-gray-900/50 mix-blend-overlay">
@@ -254,9 +316,6 @@ export const DashboardSection: React.FC<{ onBackToHome: () => void }> = ({ onBac
                         <div className="absolute inset-0 bg-gradient-to-t from-blue-950/90 via-transparent to-transparent opacity-90" />
                         
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-                           <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-blue-500/10 border border-blue-500/50 flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 group-hover:bg-blue-500/20 transition-all duration-500 backdrop-blur-sm shadow-[0_0_30px_rgba(59,130,246,0.3)]">
-                              <Music className="w-6 h-6 md:w-8 md:h-8 text-blue-400" />
-                           </div>
                            <h2 className="text-2xl md:text-5xl font-orbitron font-black text-white mb-2 md:mb-4 tracking-tight group-hover:text-blue-400 transition-colors drop-shadow-lg">
                               NON-TECHNICAL
                            </h2>

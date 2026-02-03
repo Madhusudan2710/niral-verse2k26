@@ -98,7 +98,7 @@ export const EVENTS_LIST = [
   },
   { 
     id: 'poster', 
-    title: "Poster Making", 
+    title: "Poster Presentation", 
     category: "Non-Technical",
     icon: Image, 
     color: "text-blue-400", 
